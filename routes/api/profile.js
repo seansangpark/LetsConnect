@@ -21,8 +21,8 @@ router.get('/me', auth, async (req, res) => {
     }
 
     res.json(profile);
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send('Server error');
   }
 });
@@ -104,10 +104,24 @@ router.post(
 
       await profile.save();
       res.json(profile);
-    } catch (err) {
-      console.error(err.message);
+    } catch (error) {
+      console.error(error.message);
       res.status(500).send('Server error');
     }
   }
 );
+
+// @route   GET api/profile/
+// @desc    Get all user profile
+// @access  Public
+router.get('/', async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    res.json(profiles);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
