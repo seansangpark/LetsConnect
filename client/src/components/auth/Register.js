@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import setAlert from '../../actions/alert';
+import register from '../../actions/auth';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,28 +23,7 @@ const Register = ({ setAlert }) => {
     if (password !== password2) {
       setAlert('passwords do not match', 'danger');
     } else {
-      const newUser = {
-        name,
-        email,
-        password,
-      };
-      console.log(newUser);
-      console.log('Success!');
-
-      // try {
-      //   const config = {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   };
-
-      //   const body = JSON.stringify(newUser);
-
-      //   const res = await axios.post('/api/users', body, config);
-      //   console.log(res.data);
-      // } catch (err) {
-      //   console.error(err.response.data);
-      // }
+      register({ name, email, password });
     }
   };
 
@@ -62,7 +41,6 @@ const Register = ({ setAlert }) => {
             name='name'
             value={name}
             onChange={(e) => onChange(e)}
-            required
           />
         </div>
         <div className='form-group'>
@@ -72,7 +50,6 @@ const Register = ({ setAlert }) => {
             name='email'
             value={email}
             onChange={(e) => onChange(e)}
-            required
           />
           <small className='form-text'>
             This site uses Gravatar so if you want a profile image, use a
@@ -110,6 +87,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
