@@ -1,6 +1,0 @@
-{
-  "mongoURL": "mongodb+srv://sean123:sean123@letsconnect.egbwx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  "jwtToken": "mytoken",
-  "githubClientId": "c166450ec3b4057d6058",
-  "githubSecret": "06df7e1678d4ca4c16e39a2800eb7aa6c73ebbe7"
-}
